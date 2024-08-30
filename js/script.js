@@ -53,16 +53,49 @@ errorMsg = classes("error"),
 successIcon = classes("success-icon"),
 failureIcon = classes("failure-icon");
 
-form.addEventListener("submit", (e) => {
-    
-    e.preventDefault();
+function validateForm() {
+    const name = id('username').value;
+    const email = id('email').value;
+    const password = id('password').value;
 
-    engine(username, 0, "Username can't be blank");
-    engine(email, 1, "Email can't be blankb");
-    engine(password, 2, "Password can't be blankb");
-    
+    if (name.trim() === '') {
+        alert("Username can't be blank");
+        return false;
+    } else if (name.length <= 3) {
+        alert('Name must be at least 3 letters long.');
+        return false;
+    }
+
+    if (email.trim() === '') {
+        alert("Email can't be blank");
+        return false;
+    } else {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert("Please enter a valid email address");
+            return false;
+        }
+    }
+
+    if (password.trim() === '') {
+        alert("Password can't be blank");
+        return false;
+    }
+
+    alert('Form submitted successfully!');
+    return true;
+}
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form submission
+
+    // Call the validation function
+    if (validateForm()) {
+        // If validation is successful, proceed with form submission
+        // You can submit the form using the following line:
+        // e.target.submit();
+    }
 });
-
 let engine = (id, serial, message) => {
     if (id.value.trim() === "") {
         errorMsg[serial].innerHTML = message;
