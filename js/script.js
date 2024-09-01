@@ -59,30 +59,54 @@ function validateForm() {
     const password = id('password').value;
 
     if (name.trim() === '') {
-        alert("Username can't be blank");
+        Swal.fire({
+            title: "Warning",
+            text: "Username can't be blank",
+            icon: "warning"
+          });
         return false;
     } else if (name.length <= 3) {
-        alert('Name must be at least 3 letters long.');
+        Swal.fire({
+            title: "Warning",
+            text: "Name must be at least 3 letters long.",
+            icon: "warning"
+          });
         return false;
     }
 
     if (email.trim() === '') {
-        alert("Email can't be blank");
+        Swal.fire({
+            title: "Warning",
+            text: "Email can't be blank",
+            icon: "warning"
+          });
         return false;
     } else {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(email)) {
-            alert("Please enter a valid email address");
+            Swal.fire({
+                title: "Invalid",
+                text: "Please enter a valid email address",
+                icon: "warning"
+              });
             return false;
         }
     }
 
     if (password.trim() === '') {
-        alert("Password can't be blank");
+        Swal.fire({
+            title: "Warning",
+            text: "Password can't be blank",
+            icon: "warning"
+          });
         return false;
     }
 
-    alert('Form submitted successfully!');
+    Swal.fire({
+        title: "Good job!",
+        text: "You clicked the button!",
+        icon: "success"
+      });
     return true;
 }
 
@@ -95,6 +119,9 @@ form.addEventListener('submit', function(e) {
         // You can submit the form using the following line:
         // e.target.submit();
     }
+
+    
+    
 });
 let engine = (id, serial, message) => {
     if (id.value.trim() === "") {
